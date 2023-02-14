@@ -14,17 +14,6 @@ class Blackjack {
         return
     }
 
-    // Depreciated
-    // newGame() {
-    //     this.deck.shuffle();
-    //     for (let player of this.players) {
-    //         player.hand = [];
-    //         player.hand.push(this.deck.drawCard());
-    //         player.hand.push(this.deck.drawCard());
-    //     }
-    //     return
-    // }
-
     endTurn() {
         // Dealer finished turn
         if (this.turn == 0) {
@@ -96,5 +85,30 @@ class Blackjack {
         for (let player of this.players) {
             player.hand.push(this.deck.drawCard());
         }
+    }
+
+    checkResults() {
+        let dealer = this.players[0];
+        let dealerBusted = dealer.busted();
+        let winners = [];
+        let losers = [];
+        let draw = [];
+        
+        for (let i = 1; i < this.players.length; i++) {
+            let player = this.players[i];
+            // Check player results
+            if (player.busted()) {
+                losers.push(i);
+            } else if (dealerBusted) {
+                winners.push(i);
+            } else if (player.handValue < dealer.handValue()) {
+                losers.push(i);
+            } else if (player.handValue > dealer.handValue()) {
+                winners.push(i);
+            } else {
+                draw.push(i);
+            }
+        }
+        return {winners, losers, draw};
     }
 }
