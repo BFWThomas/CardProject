@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+        <script src="scriptsPractice/deck.js"></script>
+        <script src="scriptsPractice/player.js"></script>
+        <script src="scriptsPractice/blackjack.js"></script>
+        <script src="scriptsPractice/practice.js"></script>
+         <title>Practice</title>
+        <link rel="stylesheet" href="assets/main.css">
+    </head>
+    <body>
+        <nav>
+            <ul>                
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="learn.html">Learn</a></li>
+                <li><a href="practice.html" class="active">Practice</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Practice</h1>
+            
+
+            <div id="play-space">
+                <button id="start">New Game</button>
+                <button id="addplayer">Add Player</button>
+                <div id="controls">
+                    <label>Bet</label>
+                    <input type="number" id="bet" value="0"><br>
+                    <button id="stand">Stand</button>
+                    <button id="hit">Hit</button>
+                    <button id="double">Double</button>
+                    <button id="split">Split</button>
+                </div>
+            </div>
+            We are using Node.js <span id="node-version"></span>,
+            Chromium <span id="chrome-version"></span>,
+            and Electron <span id="electron-version"></span>.
+        </main>
+    </body>
+</html>

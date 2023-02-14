@@ -1,0 +1,33 @@
+table, th, td {
+    background-color: white;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+table {
+    margin-bottom: 15px;
+}
+.blue-cell {
+    background-color: aqua;
+    color: black;
+}
+
+.green-cell {
+    background-color: limegreen;
+    color: black;
+}
+
+.red-cell {
+    background-color: red;
+    color: black;
+}
+
+.white-cell {
+    background-color: white;
+    color: black;
+}
+
+.yellow-cell {
+    background-color: yellow;
+    color: black;
+}
