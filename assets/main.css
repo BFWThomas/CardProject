@@ -39,3 +39,6 @@ table, th, td {
     padding: 5px;
 }
 
+.hidden {
+    display: none;
+}

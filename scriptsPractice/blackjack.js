@@ -38,7 +38,7 @@ class Blackjack {
 
     hit(player) {
         player.hand.push(this.deck.drawCard());
-        if (player.handValue() > 21) {
+        if (player.bust) {
             this.turn--;
         }
         return

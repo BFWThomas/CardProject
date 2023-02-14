@@ -9,6 +9,10 @@ class Card {
         this.suit = suit;
         this.value = value;
     }
+
+    cardString() {
+        return `${this.value} of ${this.suit}`
+    }
 }
 
 /*
