@@ -1,26 +1,25 @@
 window.onload=function() {
-    let submit = document.getElementById("calculate");
     const houseEdge = 0.007;
     let bank;
     let bet;
     let numHands;
-    
-    submit.onclick = function() {
+
+    let submit = document.getElementById("calculate");
+    submit.addEventListener('click', function() {
         // Get required values
-        bank = document.getElementById("bankStart").value;
-        bet = document.getElementById("bet").value;
-        numHands = document.getElementById("hands").value;
+        bank = Number(document.getElementById("bankStart").value);
+        bet = Number(document.getElementById("bet").value);
+        numHands = Number(document.getElementById("hands").value);
 
         //Calculate
-        let eValue = bet * (1-houseEdge);
-        let handDelta = eValue - bet;
-        bank = bank + (handDelta * numHands);
+        let ev = bet * (1-houseEdge);
+        let handDelta = ev - bet;
+        bank += handDelta * numHands;
+        bank = bank.toFixed(2);
 
-        const outputDiv = documet.getElementById("output");
-        outputDiv.innerHTMl = "";
+        const outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = "";
 
-        outputDiv.innerHTML = `<span>Bank value after <b>${numHabds}</b> hands at $${bet} per play: ${bank}<span>`
-    }
-
-    return
+        outputDiv.innerHTML = `<span>Bank value after <b>${numHands}</b> hands at <b>$${bet}</b> per play: <b>${bank}</b><span>`
+    });
 }
