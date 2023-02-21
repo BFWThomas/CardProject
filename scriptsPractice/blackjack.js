@@ -72,6 +72,13 @@ class Blackjack {
         return dealer.handValue()
     }
 
+    computerTurn(player) {
+        while (player.handValue() < 17) {
+            player.hand.push(this.deck.drawCard());
+        }
+        return player.handValue()
+    }
+
     startround() {
         // Mark as in play and set turn to last player
         this.inPlay = true;
@@ -110,5 +117,16 @@ class Blackjack {
             }
         }
         return {winners, losers, draw};
+    }
+
+    turnControl() {
+        if (this.turn == 0) {
+            this.dealerTurn();
+            this.checkResults();
+        } else if (this.turn != 1) {
+            this.computerTurn();
+        } else {
+            return
+        }
     }
 }

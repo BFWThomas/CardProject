@@ -43,9 +43,19 @@ function renderCards(game) {
         playersDiv.appendChild(playerDiv);
     }
 
+    // If not dealer turn, only show card 1 otherwise show entire hand
     const dealerDiv = document.createElement("div");
-    dealerDiv.innerText = `Dealer: ${game.players[0].hand[0].cardString()}`;
+    if (game.turn != 0) {
+        dealerDiv.innerText = `Dealer: ${game.players[0].hand[0].cardString()}`;
+    } else {
+        let dealerHand = [];
+        for (let j=0; j<game.players[0].hand.length; j++) {
+            dealerHand.push(game.players[0].hand[j].cardString());
+        }
+        dealerDiv.innerText = `Dealer: ${dealerHand.join(", ")}`;
+    }
     playersDiv.prepend(dealerDiv);
+    return
 }
 
 
@@ -95,9 +105,13 @@ window.onload=function() {
     document.getElementById("stand").addEventListener('click', function() {
         if (game.turn == 1) {
             game.stand(game.players[1]);
+            if (game.turn == 0) {
+                game.dealerTurn(game.players[0]);
+            }
         } else {
             console.log("Can only play on your turn");
         }
+        renderCards(game);
     });
 
     document.getElementById("hit").addEventListener('click', function() {
