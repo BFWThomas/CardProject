@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+        <script src="calculator.js"></script>
          <title>Calculator</title>
         <link rel="stylesheet" href="assets/main.css">
     </head>
@@ -17,9 +18,16 @@
         </nav>
         <main>
             <h1>Calculator</h1>
-            We are using Node.js <span id="node-version"></span>,
-            Chromium <span id="chrome-version"></span>,
-            and Electron <span id="electron-version"></span>.
+            <div id="calculator">
+                <label>Start Bank: </label> <input type="number">
+                <label>Bet/Hand</label><input type="number"><br>
+                <label>Hands to play</label><input type="number">
+                <br>
+                <button>Calculate</button>
+            </div>
+            <div id="output">
+
+            </div>
         </main>
     </body>
 </html>
