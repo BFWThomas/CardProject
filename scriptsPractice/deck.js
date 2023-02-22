@@ -13,6 +13,12 @@ class Card {
     cardString() {
         return `${this.value} of ${this.suit}`
     }
+
+    cardImage() {
+        const suitName = this.suit.toLowerCase();
+        const valueName = this.value.toString().toLowerCase();
+        return `./assets/images/${suitName}/${valueName}.png`
+    }
 }
 
 /*

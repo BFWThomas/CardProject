@@ -28,15 +28,20 @@ function renderCards(game) {
         const player = game.players[i];
         const playerDiv = document.createElement("div");
         
-        // Convert cards to a string
-        let playerHand = [];
-        for (let j=0; j<player.hand.length; j++) {
-            playerHand.push(player.hand[j].cardString());
-        }
-
         // Differenciate between players and user
         if (i==1) {
-            playerDiv.innerHTML = `${player.result} <b>You</b>: ${playerHand.join(", ")}`; 
+            playerDiv.innerHTML = `${player.result} <b>You</b>: `;
+            // Get card image
+            for (let j=0; j<player.hand.length; j++) {
+                const cardDiv = document.createElement("div");
+                cardDiv.className = "card";
+
+                const cardImg = document.createElement("img");
+                cardImg.src = player.hand[j].cardImage();
+                cardImg.alt = player.hand[j].cardString();
+                cardDiv.appendChild(cardImg);
+                playerDiv.appendChild(cardDiv);
+            }
         } else {
             playerDiv.innerText = `${player.result} Player ${i + 1}: ${playerHand.join(", ")}`;
         }
@@ -46,13 +51,29 @@ function renderCards(game) {
     // If not dealer turn, only show card 1 otherwise show entire hand
     const dealerDiv = document.createElement("div");
     if (game.turn != 0) {
-        dealerDiv.innerText = `Dealer: ${game.players[0].hand[0].cardString()}`;
+        dealerDiv.innerHTML = "Dealer: ";
+        const cardDiv = document.createElement("div");
+        cardDiv.className = "card";
+
+        const cardImg = document.createElement("img");
+        cardImg.src = game.players[0].hand[0].cardImage();
+        cardImg.alt = game.players[0].hand[0].cardString();
+        cardDiv.appendChild(cardImg);
+        dealerDiv.appendChild(cardDiv);
     } else {
-        let dealerHand = [];
-        for (let j=0; j<game.players[0].hand.length; j++) {
-            dealerHand.push(game.players[0].hand[j].cardString());
+        
+        dealerDiv.innerHTML = "Dealer: ";
+        for (let j=0; j<game.players[0].hand.length; j++) {        
+            const cardDiv = document.createElement("div");
+            cardDiv.className = "card";
+
+            const cardImg = document.createElement("img");
+            cardImg.src = game.players[0].hand[j].cardImage();
+            cardImg.alt = game.players[0].hand[j].cardString();
+            cardDiv.appendChild(cardImg);
+            dealerDiv.appendChild(cardDiv);
         }
-        dealerDiv.innerText = `Dealer: ${dealerHand.join(", ")}`;
+        ;
     }
     playersDiv.prepend(dealerDiv);
     return
