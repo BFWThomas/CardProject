@@ -36,9 +36,9 @@ function renderCards(game) {
 
         // Differenciate between players and user
         if (i==1) {
-            playerDiv.innerHTML = `<b>You</b>: ${playerHand.join(", ")}`; 
+            playerDiv.innerHTML = `${player.result} <b>You</b>: ${playerHand.join(", ")}`; 
         } else {
-            playerDiv.innerText = `Player ${i + 1}: ${playerHand.join(", ")}`;
+            playerDiv.innerText = `${player.result} Player ${i + 1}: ${playerHand.join(", ")}`;
         }
         playersDiv.appendChild(playerDiv);
     }
@@ -105,9 +105,8 @@ window.onload=function() {
     document.getElementById("stand").addEventListener('click', function() {
         if (game.turn == 1) {
             game.stand(game.players[1]);
-            if (game.turn == 0) {
-                game.dealerTurn(game.players[0]);
-            }
+            game.dealerTurn(game.players[0]);
+            game.checkResults();
         } else {
             console.log("Can only play on your turn");
         }
@@ -117,6 +116,11 @@ window.onload=function() {
     document.getElementById("hit").addEventListener('click', function() {
         if (game.turn == 1) {
             game.hit(game.players[1]);
+            if (game.players[1].busted()) {
+                game.turn--;
+                game.dealerTurn(game.players[0]);
+                game.checkResults();
+            }
             renderCards(game);
         } else {
             console.log("Can only play on your turn");
@@ -126,6 +130,9 @@ window.onload=function() {
     document.getElementById("double").addEventListener('click', function() {
         if (game.turn == 1) {
             game.double(game.players[1]);
+            game.turn--;
+            game.dealerTurn(game.players[0]);
+            game.checkResults();
             renderCards(game);
         } else {
             console.log("Can only play on your turn");

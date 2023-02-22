@@ -69,6 +69,7 @@ class Blackjack {
         while (dealer.handValue() < 17) {
             dealer.hand.push(this.deck.drawCard());
         }
+        dealer.bust = dealer.busted();
         return dealer.handValue()
     }
 
@@ -86,6 +87,10 @@ class Blackjack {
 
         // Clear hands and give each player 1 card then another
         for (let player of this.players) {
+            player.result = "";
+            player.split = false;
+            player.splitHand = [];
+            player.bust = false;
             player.hand = [];
             player.hand.push(this.deck.drawCard());
         }
@@ -105,18 +110,23 @@ class Blackjack {
             let player = this.players[i];
             // Check player results
             if (player.busted()) {
-                losers.push(i);
+                losers.push(player);
+                player.result = "Busted";
             } else if (dealerBusted) {
-                winners.push(i);
+                winners.push(player);
+                player.result = "Winner!";
             } else if (player.handValue < dealer.handValue()) {
-                losers.push(i);
+                losers.push(player);
+                player.result = "Loser";
             } else if (player.handValue > dealer.handValue()) {
-                winners.push(i);
+                winners.push(player);
+                player.result = "Winner!";
             } else {
-                draw.push(i);
+                draw.push(player);
+                player.result = "Push";
             }
         }
-        return {winners, losers, draw};
+        return [winners, losers, draw];
     }
 
     turnControl() {

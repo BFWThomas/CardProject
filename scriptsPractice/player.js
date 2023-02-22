@@ -4,6 +4,7 @@ class Player {
         this.splitHand = [];
         this.split = false;
         this.bust = false;
+        this.result = "";
     }
 
     // Count up the total of the player's hand
