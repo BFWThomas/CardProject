@@ -4,12 +4,12 @@
   "description": "CS 469 project",
   "main": "main.js",
   "scripts": {
-	  "start": "electron .",
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "thomasb3",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^22.1.0"
+    "electron": "^22.3.1"
   }
 }
