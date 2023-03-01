@@ -115,10 +115,10 @@ class Blackjack {
             } else if (dealerBusted) {
                 winners.push(player);
                 player.result = "Winner!";
-            } else if (player.handValue < dealer.handValue()) {
+            } else if (player.handValue() < dealer.handValue()) {
                 losers.push(player);
                 player.result = "Loser";
-            } else if (player.handValue > dealer.handValue()) {
+            } else if (player.handValue() > dealer.handValue()) {
                 winners.push(player);
                 player.result = "Winner!";
             } else {
