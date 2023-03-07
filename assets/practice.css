@@ -1,0 +1,26 @@
+#play-space {
+    width: 80%;
+    max-width: 500px;
+    height: 100%;
+}
+
+.pre-controls {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+#start {
+    margin-top: 2em;
+}
+
+.count-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+}
+
+
+.red {color: red;}
+.yellow {color: yellow;}
+.green {color: green}

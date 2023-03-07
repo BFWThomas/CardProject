@@ -9,6 +9,8 @@
         <script src="scriptsPractice/practice.js"></script>
          <title>Practice</title>
         <link rel="stylesheet" href="assets/main.css">
+        <link rel="stylesheet" href="assets/practice.css">
+        <link rel="stylesheet" href="assets/sliderSwitch.css">
     </head>
     <body>
         <nav>
@@ -23,10 +25,20 @@
             <h1>Practice</h1>
             
 
-            <div id="play-space">
-                <button id="start">New Game</button>
-                <div id="players"></div>
-                <div id="controls">
+            <div id="play-space" class="play-space">
+                <div class="pre-controls">
+                    <button id="start">New Game</button>
+                    <div class="count-wrapper">
+                        <label>Show Count</label>
+                        <label class="switch">
+                            <input type="checkbox" id="countToggle" class="toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <div id="displayCount" hidden></div>
+                    </div>
+                </div>
+                <div id="players" class="players"></div>
+                <div id="controls" class="controls">
                     <button id="addplayer">Add Player</button>
                     <button id="removeplayer">Remove Player</button><br>
                     

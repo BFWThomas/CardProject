@@ -79,7 +79,22 @@ function renderCards(game) {
     return
 }
 
+function updateCountDisplay(game) {
+    const displayCount = document.getElementById("displayCount");
+    const count = game.deck.count;
+    console.log(count);
+    let color;
 
+    if (count < 1) {
+        color = "red";
+    } else if (count < 4) {
+        color = "yellow";
+    } else {
+        color = "green";
+    }
+
+    displayCount.innerHTML = `Count: <span class="${color}">${count}</span>`;
+}
 
 window.onload=function() {
     // Hide controls until new game made
@@ -95,6 +110,19 @@ window.onload=function() {
         game.bet = document.getElementById("bet").value;
 
         controlsDiv.classList.remove("hidden");
+    });
+
+    // Toggle count tracker
+    const countToggle = document.getElementById("countToggle");
+    const displayCount = document.getElementById("displayCount");
+
+    countToggle.addEventListener("change", function() {
+        if (countToggle.checked) {
+            displayCount.removeAttribute("hidden");
+            updateCountDisplay(game);
+        } else {
+            displayCount.setAttribute("hidden", "");
+        }
     });
 
     // Add player
@@ -120,6 +148,7 @@ window.onload=function() {
     document.getElementById("deal").addEventListener('click', function() {
         game.startround();
         renderCards(game);
+        updateCountDisplay(game);
         game.turn = game.players.length-1;
     });
 
@@ -132,6 +161,7 @@ window.onload=function() {
             console.log("Can only play on your turn");
         }
         renderCards(game);
+        updateCountDisplay(game);
     });
 
     document.getElementById("hit").addEventListener('click', function() {
@@ -143,6 +173,7 @@ window.onload=function() {
                 game.checkResults();
             }
             renderCards(game);
+            updateCountDisplay(game);
         } else {
             console.log("Can only play on your turn");
         }
@@ -155,6 +186,7 @@ window.onload=function() {
             game.dealerTurn(game.players[0]);
             game.checkResults();
             renderCards(game);
+            updateCountDisplay(game);
         } else {
             console.log("Can only play on your turn");
         }
@@ -164,6 +196,7 @@ window.onload=function() {
         if (game.turn == 1) {
             game.split(game.players[1]);
             renderCards(game);
+            updateCountDisplay(game);
         } else {
             console.log("Can only play on your turn");
         }

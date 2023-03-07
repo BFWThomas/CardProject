@@ -63,10 +63,9 @@ class Deck {
         let card = this.deck.pop();
         if (card.value <= 6) {
             this.count++;
-        } else if (card.value === 10 || card.value === 'Jack' || card.value === 'Queen' || card.value === 'King') {
+        } else if (card.value === 'A' || card.value === 10 || card.value === 'Jack' || card.value === 'Queen' || card.value === 'King') {
             this.count--;
         }
-        console.log(this.count);
         return card
     }
 }
