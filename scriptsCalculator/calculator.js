@@ -66,23 +66,24 @@ window.onload=function() {
             const underOdds = under/(undercount);
             const overOdds = over/(overcount);
 
-            let underEV = bet * (1+underOdds);
-            let overEV = deltaBet * (1+overOdds);
-            let handDelta = (underEV - bet) + (overEV - deltaBet);
-            console.log("OverEV: "+over);
-            console.log("underEV: "+underEV);
-            bank += handDelta*numHands;
-            bank = bank.toFixed(2);
-
+            for (let i=0; i <= numHands; i++) {
+                let underEV = bet * (1+underOdds);
+                let overEV = deltaBet * (1+overOdds);
+                let handDelta = (underEV - bet) + (overEV - deltaBet);
+                bank += handDelta*i;
+                bank = Math.round((bank + Number.EPSILON) * 100) / 100;
+                bankValues.push(bank);
+            }
         } else {
-            let ev = bet * (1+houseEdge);
-            let handDelta = ev - bet;
-            bank += handDelta * numHands;
-            // bank = bank.toFixed(2);
-            bank = Math.round((bank + Number.EPSILON) * 100) / 100;
+            for (let i=0; i <= numHands; i++) {
+                let ev = bet * (1+houseEdge);
+                let handDelta = ev - bet;
+                bank += handDelta * i;
+                bank = Math.round((bank + Number.EPSILON) * 100) / 100;
+                bankValues.push(bank);
+            }
         }
-        console.log(typeof(bank));
-        bankValues.push(bank);
+
         // Write output
         outputDiv.innerHTML = "";
         outputDiv.innerHTML = `<span>Bank value after <b>${numHands}</b> hands at <b>$${bet}</b> per play: <b>${bank}</b><span>`
