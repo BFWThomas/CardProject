@@ -15,6 +15,7 @@ const oddVariance = {
     '12': [0.0007, 0.0743]
   };
 
+var bankValues = [];
 
 window.onload=function() {
     let houseEdge = -0.007;
@@ -41,7 +42,7 @@ window.onload=function() {
         numHands = Number(document.getElementById("hands").value);
 
         // Calculate
-        const outputDiv = document.getElementById("output");
+        const outputDiv = document.getElementById("outputText");
         if (toggle.checked) {
             let deltaBet = document.getElementById("betVariance").value;
             let minCount = document.getElementById("minCount").value;
@@ -77,9 +78,11 @@ window.onload=function() {
             let ev = bet * (1+houseEdge);
             let handDelta = ev - bet;
             bank += handDelta * numHands;
-            bank = bank.toFixed(2);
+            // bank = bank.toFixed(2);
+            bank = Math.round((bank + Number.EPSILON) * 100) / 100;
         }
-
+        console.log(typeof(bank));
+        bankValues.push(bank);
         // Write output
         outputDiv.innerHTML = "";
         outputDiv.innerHTML = `<span>Bank value after <b>${numHands}</b> hands at <b>$${bet}</b> per play: <b>${bank}</b><span>`
