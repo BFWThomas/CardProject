@@ -29,6 +29,7 @@ class Deck {
     constructor(size) {
         this.deck = [];
         this.create(size);
+        this.count = 0;
     }
 
     // Create deck with *size* number of repeats
@@ -59,6 +60,13 @@ class Deck {
     }
 
     drawCard() {
-        return this.deck.pop();
+        let card = this.deck.pop();
+        if (card.value <= 6) {
+            this.count++;
+        } else if (card.value === 10 || card.value === 'Jack' || card.value === 'Queen' || card.value === 'King') {
+            this.count--;
+        }
+        console.log(this.count);
+        return card
     }
 }

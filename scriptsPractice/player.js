@@ -13,7 +13,7 @@ class Player {
         for (let card of this.hand) {
             if (['Jack', 'Queen', 'King'].includes(card.value)) {
                 total += 10;
-            } else if (card.value === 'Ace') {
+            } else if (card.value === 'A') {
                 if (total + 11 > 21) {total += 1;} 
                 else {total += 11;}
             } else {
