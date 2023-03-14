@@ -83,7 +83,6 @@ function renderCards(game) {
 function updateCountDisplay(game) {
     const displayCount = document.getElementById("displayCount");
     const count = game.deck.count;
-    console.log(count);
     let color;
 
     if (count < 1) {
@@ -155,11 +154,11 @@ window.onload=function() {
     // Game controls
 
     document.getElementById("deal").addEventListener('click', function() {
+        updateCountDisplay(game);
         game.startround();
         document.getElementById("correctPlay").innerHTML = "";
         recommendedPlay = basicStrategy(game.players[0].hand[0], game.players[1].hand);
         renderCards(game);
-        updateCountDisplay(game);
         game.turn = game.players.length-1;
     });
 
@@ -170,12 +169,12 @@ window.onload=function() {
             stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Stand');
             game.stand(game.players[1]);
             game.dealerTurn(game.players[0]);
+            updateCountDisplay(game);
             game.checkResults();
         } else {
             console.log("Can only play on your turn");
         }
         renderCards(game);
-        updateCountDisplay(game);
     });
 
     document.getElementById("hit").addEventListener('click', function() {
@@ -185,10 +184,10 @@ window.onload=function() {
             if (game.players[1].busted()) {
                 game.turn--;
                 game.dealerTurn(game.players[0]);
+                updateCountDisplay(game);
                 game.checkResults();
             }
             renderCards(game);
-            updateCountDisplay(game);
         } else {
             console.log("Can only play on your turn");
         }
@@ -200,9 +199,9 @@ window.onload=function() {
             game.double(game.players[1]);
             game.turn--;
             game.dealerTurn(game.players[0]);
+            updateCountDisplay(game);
             game.checkResults();
             renderCards(game);
-            updateCountDisplay(game);
         } else {
             console.log("Can only play on your turn");
         }
@@ -213,7 +212,6 @@ window.onload=function() {
             stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Split');
             game.split(game.players[1]);
             renderCards(game);
-            updateCountDisplay(game);
         } else {
             console.log("Can only play on your turn");
         }
