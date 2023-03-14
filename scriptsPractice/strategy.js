@@ -101,6 +101,7 @@ function basicStrategy(dealerCard, hand) {
                 }
                 return 'Stand'
             case 9:
+            case 10:
                 return 'Stand'
             default:
                 return 'Error: invalid hand total for soft hand'
