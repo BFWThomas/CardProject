@@ -83,6 +83,7 @@ function renderCards(game) {
 function updateCountDisplay(game) {
     const displayCount = document.getElementById("displayCount");
     const count = game.deck.count;
+    const trueCount = count / game.size;
     let color;
 
     if (count < 1) {
@@ -93,7 +94,8 @@ function updateCountDisplay(game) {
         color = "green";
     }
 
-    displayCount.innerHTML = `Count: <span class="${color}">${count}</span>`;
+    displayCount.innerHTML = `Running Count: <span class="${color}">${count}</span>
+    <br>True Count: ${trueCount}`;
 }
 
 function strategyFeedback(isRight) {
@@ -215,5 +217,18 @@ window.onload=function() {
         } else {
             console.log("Can only play on your turn");
         }
+    });
+
+    document.getElementById("surrender").addEventListener('click', function () {
+        if (game.turn == 1) {
+            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Surrender');
+            game.stand(game.players[1]);
+            game.dealerTurn(game.players[0]);
+            updateCountDisplay(game);
+            game.checkResults();
+        } else {
+            console.log("Can only play on your turn");
+        }
+        renderCards(game);
     });
 }
