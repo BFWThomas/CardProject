@@ -6,7 +6,7 @@ function basicStrategy(dealerCard, hand) {
     }
 
     const handValues = hand.map(card => {
-        if (FACE_CARD_VALUES.includes(card)) {
+        if (FACE_CARD_VALUES.includes(card.value)) {
             return 10;
         } else {
             return card.value;
