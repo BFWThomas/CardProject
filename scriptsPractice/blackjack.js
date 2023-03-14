@@ -1,7 +1,8 @@
 class Blackjack {
-    constructor() {
+    constructor(size) {
         // Initiate with a fresh deck and 2 players
-        this.deck = new Deck(1);
+        this.size = size;
+        this.deck = new Deck(size);
         this.players = [new Player, new Player];
         this.bet = 0;
         this.turn = -1;
@@ -47,7 +48,6 @@ class Blackjack {
     double(player) {
         this.bet *= 2;
         player.hand.push(this.deck.drawCard());
-        this.turn--;
         return
     }
 

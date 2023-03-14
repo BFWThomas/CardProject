@@ -112,7 +112,7 @@ window.onload=function() {
     /* ---Controls------------------------------------ */
     // Create a game instance
     document.getElementById("start").addEventListener('click', function() {
-        game = new Blackjack
+        game = new Blackjack(document.getElementById("numDecks").value);
         renderPlayers(game);
         game.deck.shuffle();
         game.bet = document.getElementById("bet").value;
