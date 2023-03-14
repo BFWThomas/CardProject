@@ -1,5 +1,6 @@
 var game;
 var playerCount = 0;
+var recommendedPlay;
 
 function renderPlayers(game) {
     const playersDiv = document.getElementById("players");
@@ -96,6 +97,14 @@ function updateCountDisplay(game) {
     displayCount.innerHTML = `Count: <span class="${color}">${count}</span>`;
 }
 
+function strategyFeedback(isRight) {
+    if (isRight) {
+        return `<span class="green">Correct! The right play was to ${recommendedPlay}.</span>`;
+    } else {
+        return `<span class="red">Incorrect, the right was to ${recommendedPlay}.</span>`;
+    }
+}
+
 window.onload=function() {
     // Hide controls until new game made
     const controlsDiv = document.getElementById("controls");
@@ -147,13 +156,18 @@ window.onload=function() {
 
     document.getElementById("deal").addEventListener('click', function() {
         game.startround();
+        document.getElementById("correctPlay").innerHTML = "";
+        recommendedPlay = basicStrategy(game.players[0].hand[0], game.players[1].hand);
         renderCards(game);
         updateCountDisplay(game);
         game.turn = game.players.length-1;
     });
 
+    let stratDiv = document.getElementById("correctPlay");
+
     document.getElementById("stand").addEventListener('click', function() {
         if (game.turn == 1) {
+            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Stand');
             game.stand(game.players[1]);
             game.dealerTurn(game.players[0]);
             game.checkResults();
@@ -166,6 +180,7 @@ window.onload=function() {
 
     document.getElementById("hit").addEventListener('click', function() {
         if (game.turn == 1) {
+            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Hit');
             game.hit(game.players[1]);
             if (game.players[1].busted()) {
                 game.turn--;
@@ -181,6 +196,7 @@ window.onload=function() {
 
     document.getElementById("double").addEventListener('click', function() {
         if (game.turn == 1) {
+            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Double');
             game.double(game.players[1]);
             game.turn--;
             game.dealerTurn(game.players[0]);
@@ -194,6 +210,7 @@ window.onload=function() {
 
     document.getElementById("split").addEventListener('click', function() {
         if (game.turn == 1) {
+            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Split');
             game.split(game.players[1]);
             renderCards(game);
             updateCountDisplay(game);
