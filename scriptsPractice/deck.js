@@ -60,6 +60,10 @@ class Deck {
     }
 
     drawCard() {
+        if (this.deck.length == 0) {
+            this.create();
+            this.shuffle();
+        }
         let card = this.deck.pop();
         if (card.value <= 6) {
             this.count++;

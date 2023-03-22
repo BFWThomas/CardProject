@@ -154,11 +154,12 @@ window.onload=function() {
     });
 
     // Game controls
-
+    let gaveStrat = false;
     document.getElementById("deal").addEventListener('click', function() {
         updateCountDisplay(game);
         game.startround();
         document.getElementById("correctPlay").innerHTML = "";
+        gaveStrat = false;
         recommendedPlay = basicStrategy(game.players[0].hand[0], game.players[1].hand);
         renderCards(game);
         game.turn = game.players.length-1;
@@ -168,7 +169,12 @@ window.onload=function() {
 
     document.getElementById("stand").addEventListener('click', function() {
         if (game.turn == 1) {
-            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Stand');
+            if (gaveStrat) {
+                stratDiv.innerHTML = "";
+            } else {
+                stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Stand');
+            }
+            gaveStrat = true;
             game.stand(game.players[1]);
             game.dealerTurn(game.players[0]);
             updateCountDisplay(game);
@@ -197,7 +203,12 @@ window.onload=function() {
 
     document.getElementById("double").addEventListener('click', function() {
         if (game.turn == 1) {
-            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Double');
+            if (gaveStrat) {
+                stratDiv.innerHTML = "";
+            } else {
+                stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Double');
+            }
+            gaveStrat = true;
             game.double(game.players[1]);
             game.turn--;
             game.dealerTurn(game.players[0]);
@@ -211,7 +222,12 @@ window.onload=function() {
 
     document.getElementById("split").addEventListener('click', function() {
         if (game.turn == 1) {
-            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Split');
+            if (gaveStrat) {
+                stratDiv.innerHTML = "";
+            } else {
+                stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Split');
+            }
+            gaveStrat = true;
             game.split(game.players[1]);
             renderCards(game);
         } else {
@@ -221,7 +237,12 @@ window.onload=function() {
 
     document.getElementById("surrender").addEventListener('click', function () {
         if (game.turn == 1) {
-            stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Surrender');
+            if (gaveStrat) {
+                stratDiv.innerHTML = "";
+            } else {
+                stratDiv.innerHTML = strategyFeedback(recommendedPlay === 'Surrender');
+            }
+            gaveStrat = true;
             game.stand(game.players[1]);
             game.dealerTurn(game.players[0]);
             updateCountDisplay(game);
