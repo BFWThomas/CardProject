@@ -1,5 +1,6 @@
 class Player {
     constructor() {
+        // TODO: Allow holding multiple hands (for splits)
         this.hand = [];
         this.splitHand = [];
         this.split = false;
@@ -8,6 +9,7 @@ class Player {
     }
 
     // Count up the total of the player's hand
+    // TODO: Refactor to allow targeting specific hand in hand
     handValue() {
         let total = 0;
         let hasAce = false;
@@ -30,6 +32,7 @@ class Player {
         return total;
     }
 
+    // TODO: Refactor to target specific hand
     busted() {
         this.bust = (this.handValue() > 21);
         return this.bust;

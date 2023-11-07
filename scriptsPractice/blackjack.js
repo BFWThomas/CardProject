@@ -32,11 +32,13 @@ class Blackjack {
 
     // TODO: Won't do anything until more of game is implemented
     stand(player) {
+        // TODO: Allow holding multiple hands (for splits)
         console.log(player.hand);
         this.turn-- ;
         return
     }
 
+    // TODO: Allow holding multiple hands (for splits)
     hit(player) {
         player.hand.push(this.deck.drawCard());
         if (player.bust) {
@@ -45,12 +47,14 @@ class Blackjack {
         return
     }
 
+    // TODO: Allow holding multiple hands (for splits)
     double(player) {
         this.bet *= 2;
         player.hand.push(this.deck.drawCard());
         return
     }
 
+    // TODO: Allow holding multiple hands (for splits)
     split(player) {
         if (player.split) {
             return
@@ -66,6 +70,7 @@ class Blackjack {
 
     // Draw card until total is 17 or higher
     dealerTurn(dealer) {
+        // TODO: Refactor to target specific hand
         while (dealer.handValue() < 17) {
             dealer.hand.push(this.deck.drawCard());
         }
@@ -73,7 +78,10 @@ class Blackjack {
         return dealer.handValue()
     }
 
+    // Not used currently
+    // Trying to focus working on getting the game and single player simulation working correctly
     computerTurn(player) {
+        // TODO: Refactor to target specific hand
         while (player.handValue() < 17) {
             player.hand.push(this.deck.drawCard());
         }
@@ -91,6 +99,7 @@ class Blackjack {
             player.split = false;
             player.splitHand = [];
             player.bust = false;
+            // TODO: Allow holding multiple hands (for splits)
             player.hand = [];
             player.hand.push(this.deck.drawCard());
         }
@@ -115,9 +124,11 @@ class Blackjack {
             } else if (dealerBusted) {
                 winners.push(player);
                 player.result = "Winner!";
+            // TODO: Refactor to target specific hand
             } else if (player.handValue() < dealer.handValue()) {
                 losers.push(player);
                 player.result = "Loser";
+            // TODO: Refactor to target specific hand
             } else if (player.handValue() > dealer.handValue()) {
                 winners.push(player);
                 player.result = "Winner!";
@@ -133,8 +144,9 @@ class Blackjack {
         if (this.turn == 0) {
             this.dealerTurn();
             this.checkResults();
-        } else if (this.turn != 1) {
-            this.computerTurn();
+        // Disabled to focus on completing game and simulation
+        // } else if (this.turn != 1) {
+        //     this.computerTurn();
         } else {
             return
         }

@@ -2,6 +2,9 @@ var game;
 var playerCount = 0;
 var recommendedPlay;
 
+// Create areas on screen for each of the players in the game
+// Each user should be shown with their name and cards
+// Call this function at the start of each hand or when players change
 function renderPlayers(game) {
     const playersDiv = document.getElementById("players");
     playersDiv.innerHTML = ""; // clear existing player divs
@@ -21,7 +24,11 @@ function renderPlayers(game) {
     });
 }
 
+// Display the correct image for each card in the game
+// Cards should be contained to each players div
+// Called whenever a change in cards happens
 function renderCards(game) {
+    // TODO: Should probably split appart rendering dealer and players cause they are different
     const playersDiv = document.getElementById("players");
     playersDiv.innerHTML = ""; // clear existing player divs
 
@@ -62,7 +69,7 @@ function renderCards(game) {
         cardDiv.appendChild(cardImg);
         dealerDiv.appendChild(cardDiv);
     } else {
-        
+        // Dealer's turn
         dealerDiv.innerHTML = "Dealer: ";
         for (let j=0; j<game.players[0].hand.length; j++) {        
             const cardDiv = document.createElement("div");
@@ -74,13 +81,14 @@ function renderCards(game) {
             cardDiv.appendChild(cardImg);
             dealerDiv.appendChild(cardDiv);
         }
-        ;
     }
     playersDiv.prepend(dealerDiv);
     return
 }
 
+// Fetch count info and display it
 function updateCountDisplay(game) {
+    // Get it all ready
     const displayCount = document.getElementById("displayCount");
     const count = game.deck.count;
     const trueCount = count / game.size;
@@ -94,10 +102,12 @@ function updateCountDisplay(game) {
         color = "green";
     }
 
+    // Show it
     displayCount.innerHTML = `Running Count: <span class="${color}">${count}</span>
     <br>True Count: ${trueCount}`;
 }
 
+// Let the player know if they were right or not according to strategy
 function strategyFeedback(isRight) {
     if (isRight) {
         return `<span class="green">Correct! The right play was to ${recommendedPlay}.</span>`;

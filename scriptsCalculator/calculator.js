@@ -1,3 +1,10 @@
+/* So this technically should all work but I honestly think
+the math is going to be shoddy ad is not really in line with
+what I want. It should also really have a way to just run X amount
+of hands and log results so we can get an idea of how things
+go in the long run. */
+// TODO: Refactor this entire thing to have better math involved
+// TODO: Add simulation log (needs to link in with Practice scripts yikes)
 const oddVariance = {
     '-1': [0.4518, -0.0126],
     '0': [0.2592, -0.0011],
